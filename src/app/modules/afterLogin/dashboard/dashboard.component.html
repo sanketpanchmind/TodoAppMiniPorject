@@ -9,8 +9,15 @@
                 <div class="col-md-4 border-bottom border-end ">
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
-                            <h2 class="fw-bold text-dark">{{this.dataLength}} </h2>
-                            <h5 class="card-title text-primary">Total Tasks</h5>
+                            <div class="d-flex align-items-center justify-content-center gap-4 w-100">
+                                <div class="flex-shrink-0">
+                                    <i class="fa-solid fa-layer-group text-primary"></i>
+                                </div>
+                                <div class="d-flex align-items-center flex-column gap-0">
+                                    <h2 class="fw-bold text-dark">{{this.dataLength}} </h2>
+                                    <h5 class="card-title text-primary">Total Tasks</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -19,8 +26,15 @@
                 <div class="col-md-4 border-bottom border-end">
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
-                            <h2 class="fw-bold text-dark">{{this.completed}} </h2>
-                            <h5 class="card-title text-success">Completed Tasks</h5>
+                            <div class="d-flex align-items-center justify-content-center gap-4 w-100">
+                                <div class="flex-shrink-0">
+                                    <i class="fa-solid fa-circle-check text-success"></i>
+                                </div>
+                                <div class="d-flex align-items-center flex-column gap-0">
+                                    <h2 class="fw-bold text-dark">{{this.completed}} </h2>
+                                    <h5 class="card-title text-success">Completed Tasks</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,8 +43,15 @@
                 <div class="col-md-4 border-bottom ">
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
-                            <h2 class="fw-bold text-dark">{{this.pending}} </h2>
-                            <h5 class="card-title text-warning">Pending Tasks</h5>
+                            <div class="d-flex align-items-center justify-content-center gap-4 w-100">
+                                <div class="flex-shrink-0">
+                                    <i class="fa-solid fa-spinner text-warning"></i>
+                                </div>
+                                <div class="d-flex align-items-center flex-column gap-0">
+                                    <h2 class="fw-bold text-dark">{{this.pending}} </h2>
+                                    <h5 class="card-title text-warning">Pending Tasks</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,15 @@
                             <td>{{tasklist.taskDescription}} </td>
                             <td>{{tasklist.createdOn | date}} </td>
                             <td>{{tasklist.dueDate | date}} </td>
-                            <td>{{tasklist.isCompleted}} </td>
+                            <td>
+                                <div *ngIf="tasklist.isCompleted">
+                                    <span class="badge rounded-pill text-bg-success">Completed</span>
+                                </div>
+                                <div *ngIf="!tasklist.isCompleted">
+                                    <span class="badge rounded-pill text-bg-danger">Not Completed</span>
+                                </div>
+                                <!-- {{tasklist.isCompleted}} -->
+                            </td>
                             <td>{{tasklist.completedOn | date}} </td>
                             <td>
                                 <div class="d-flex gap-2">
