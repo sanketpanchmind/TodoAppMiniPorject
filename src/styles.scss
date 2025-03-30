@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body{
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    font-optical-sizing: auto;
+}
+
+.form-container .form-label{
+    font-size: 0.85rem !important;
+    font-weight: 500;
+}
+.form-container .form-data{
+    font-size: 0.85rem !important;
+    font-weight: 700;
+}
+
+.btn-main{
+    background-color: #f48b37 !important;
+    color: #fff !important;
+}
+.btn-main-light{
+    background-color: #f8700282 !important;
+    
+}

@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <h4>Task Management</h4>
+                <button class="btn btn-main" (click)="createtask()">
+                    <i class="fa-solid fa-plus"></i>
+                    Create Task
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Sr. No.</td>
+                            <td>Task Name</td>
+                            <td>Task Description</td>
+                            <td>Created On</td>
+                            <td>Due Date</td>
+                            <td>Is Completed</td>
+                            <td>Completed On</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tasklist of tasklisttblArray; let i=index">
+                            <td>{{i+1}} </td>
+                            <td>{{tasklist.taskName}} </td>
+                            <td>{{tasklist.taskDescription}} </td>
+                            <td>{{tasklist.createdOn | date}} </td>
+                            <td>{{tasklist.dueDate | date}} </td>
+                            <td>{{tasklist.isCompleted}} </td>
+                            <td>{{tasklist.completedOn | date}} </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-secondary" (click)="editTask(tasklist)"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger" (click)="deletetask(tasklist)"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal form-container" #createtaskmodal>
+    <!-- create task modal -->
+    <form [formGroup]="addtaskform" (ngSubmit)="createNewTask()">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="exampleModalLabel">{{!this.editflag ? 'Create New Task' : 'Update Task'
+                        }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closemodal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row gy-3">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Task Name</label>
+                            <input class="form-control" id="disabledInput" type="text" formControlName="taskname"
+                                placeholder="Disabled input here..." [disabled]="editflag">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Task Description</label>
+                            <input type="text" class="form-control" formControlName="taskdescription">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Create Date</label>
+                            <input type="date" class="form-control" formControlName="createdOn">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" formControlName="duedate">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Select Status</label>
+                            <select class="form-select" formControlName="isCompleted">
+                                <option value="true">Yes</option>
+                                <option value="false" checked>No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-main"
+                        (click)="this.editflag ?  updateTask() : createNewTask() ">{{this.editflag ? 'Update' :
+                        'Submit'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="card shadow-lg py-4 my-2">
+        <div class="card-header border-bottom">
+            <h4>Dashboard</h4>
+        </div>
+        <div class="card-body">
+            <div class="row gy-5">
+                <!-- Total Tasks Card -->
+                <div class="col-md-4 border-bottom border-end ">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <h2 class="fw-bold text-dark">{{this.dataLength}} </h2>
+                            <h5 class="card-title text-primary">Total Tasks</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Tasks Card -->
+                <div class="col-md-4 border-bottom border-end">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <h2 class="fw-bold text-dark">{{this.completed}} </h2>
+                            <h5 class="card-title text-success">Completed Tasks</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Tasks Card -->
+                <div class="col-md-4 border-bottom ">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <h2 class="fw-bold text-dark">{{this.pending}} </h2>
+                            <h5 class="card-title text-warning">Pending Tasks</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 border-end">
+                    <div class="card">
+                        <h5 class="fw-bold text-info">Task Overview</h5>
+                        <apx-chart *ngIf="chartOptions" [series]="chartOptions.series" [chart]="chartOptions.chart"
+                            [labels]="chartOptions.labels" [responsive]="chartOptions.responsive"
+                            [legend]="chartOptions.legend">
+
+                        </apx-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
