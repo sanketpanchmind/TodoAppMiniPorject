@@ -37,26 +37,26 @@ export class DashboardComponent {
 
   ngOnInit() {
 
-    this.getdatatasks();
+    // this.getdatatasks();
 
   }
 
-  getdatatasks() {
-    this.taskService.getAlltaskList().subscribe({
-      next: (res: any) => {
-        console.log(res.data);
-        console.log(res.data.length);
-        this.dataLength = res.data.length;
+  // getdatatasks() {
+  //   this.taskService.getAlltaskList().subscribe({
+  //     next: (res: any) => {
+  //       console.log(res.data);
+  //       console.log(res.data.length);
+  //       this.dataLength = res.data.length;
 
-        this.completed = res.data.filter((data: any) => data.isCompleted == true).length;
-        console.log(this.completed);
+  //       this.completed = res.data.filter((data: any) => data.isCompleted == true).length;
+  //       console.log(this.completed);
 
-        this.pending = res.data.filter((data: any) => data.isCompleted == false).length;
-        this.updatechart();
+  //       this.pending = res.data.filter((data: any) => data.isCompleted == false).length;
+  //       this.updatechart();
 
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 
   updatechart() {
     this.chartOptions = {

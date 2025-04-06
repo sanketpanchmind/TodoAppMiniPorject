@@ -12,8 +12,8 @@ export class TaskManagementService {
 
   }
 
-  getAlltaskList(): Observable<any> {
-    return this.http.get('https://freeapi.miniprojectideas.com/api/JWT/GetAllTaskList');
+  getAlltaskList(id: number): Observable<any> {
+    return this.http.get('https://api.freeprojectapi.com/api/GoalTracker/getAllTasks?userId=' + id);
   }
 
   createtask(obj: any): Observable<any> {

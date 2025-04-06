@@ -17,7 +17,6 @@
                         <tr>
                             <td>Sr. No.</td>
                             <td>Task Name</td>
-                            <td>Task Description</td>
                             <td>Created On</td>
                             <td>Due Date</td>
                             <td>Is Completed</td>
@@ -29,8 +28,8 @@
                         <tr *ngFor="let tasklist of tasklisttblArray; let i=index">
                             <td>{{i+1}} </td>
                             <td>{{tasklist.taskName}} </td>
-                            <td>{{tasklist.taskDescription}} </td>
-                            <td>{{tasklist.createdOn | date}} </td>
+                            <td>{{tasklist.frequency}} </td>
+                            <td>{{tasklist.createdDate | date}} </td>
                             <td>{{tasklist.dueDate | date}} </td>
                             <td>
                                 <div *ngIf="tasklist.isCompleted">
@@ -41,7 +40,6 @@
                                 </div>
                                 <!-- {{tasklist.isCompleted}} -->
                             </td>
-                            <td>{{tasklist.completedOn | date}} </td>
                             <td>
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-secondary" (click)="editTask(tasklist)"><i

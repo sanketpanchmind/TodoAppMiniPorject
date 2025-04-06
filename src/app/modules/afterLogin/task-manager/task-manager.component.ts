@@ -45,15 +45,22 @@ export class TaskManagerComponent {
 
 
   getAllTasks() {
-    this.taskservice.getAlltaskList().subscribe({
-      next: (res: any) => {
-        console.log(res.data);
-        this.tasklisttblArray = res.data;
-      },
-      error: (error: any) => {
-        console.log(error, error.message);
-      }
-    })
+    const id = localStorage.getItem('Currentuser');
+    if (id) {
+      const currentuser = JSON.parse(id);
+      console.log("current user id-", currentuser);
+      const currentuserid = currentuser.userId;
+      this.taskservice.getAlltaskList(currentuserid).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.tasklisttblArray = res;
+        },
+        error: (error: any) => {
+          console.log(error, error.message);
+        }
+      })
+    }
+
   }
 
   createNewTask() {
