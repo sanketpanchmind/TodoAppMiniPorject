@@ -1,36 +1,44 @@
-<div class="container">
-    <div class="screen">
-        <div class="screen__content">
-            <form class="login">
-                <div class="login__field">
-                    <i class="login__icon fas fa-user"></i>
-                    <input type="text" class="login__input" placeholder="User name / Email">
-                </div>
-                <div class="login__field">
-                    <i class="login__icon fas fa-lock"></i>
-                    <input type="password" class="login__input" placeholder="Password">
-                </div>
-                <button class="button login__submit" routerLink="">
-                    <span class="button__text">Log In Now</span>
-                    <i class="button__icon fas fa-chevron-right"></i>
-                </button>
-            </form>
-            <div class="social-login">
-                <h3>log in via</h3>
-                <div class="social-icons">
-                    <a href="#" class="social-login__icon fab fa-instagram"></a>
-                    <a href="#" class="social-login__icon fab fa-facebook"></a>
-                    <a href="#" class="social-login__icon fab fa-twitter"></a>
-                </div>
-            </div>
+<div class="register-container">
+    <h2>Register</h2>
+    <form [formGroup]="registerform" (ngSubmit)="register()">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" formControlName="fullName" required />
         </div>
-        <div class="screen__background">
-            <span class="screen__background__shape screen__background__shape4"></span>
-            <span class="screen__background__shape screen__background__shape3"></span>
-            <span class="screen__background__shape screen__background__shape2"></span>
-            <span class="screen__background__shape screen__background__shape1"></span>
+
+        <div class="form-group">
+            <label for="emailId">Email ID</label>
+            <input type="email" id="emailId" formControlName="emailId" required />
         </div>
-    </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" required />
+        </div>
+
+        <div class="form-group">
+            <label for="mobileNo">Mobile Number</label>
+            <input type="text" id="mobileNo" formControlName="mobileNo" required />
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
 </div>
 
-<!-- swagger login User -->
+<div class="login-container">
+    <h2>Login</h2>
+    <form [formGroup]="loginform" (ngSubmit)="submit()">
+        <div class="form-group">
+            <label for="emailId">Email ID</label>
+            <input type="email" id="emailId" formControlName="loginemailId" required />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="loginpassword" required />
+        </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
