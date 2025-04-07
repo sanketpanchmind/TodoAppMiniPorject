@@ -17,13 +17,14 @@ export class TaskManagementService {
   }
 
   createtask(obj: any): Observable<any> {
-    return this.http.post('https://freeapi.miniprojectideas.com/api/JWT/CreateNewTask', obj);
+    return this.http.post('https://api.freeprojectapi.com/api/GoalTracker/createTask', obj);
   }
 
   editTask(obj: any): Observable<any> {
-    return this.http.put('https://freeapi.miniprojectideas.com/api/JWT/UpdateTask', obj);
+    return this.http.put(`https://api.freeprojectapi.com/api/GoalTracker/updateTask/${obj.taskId}`, obj);
   }
   delete(id: any): Observable<any> {
-    return this.http.delete(`https://freeapi.miniprojectideas.com/api/JWT/DeleteTask?itemId=${id}`);
+    // return this.http.delete(`https://freeapi.miniprojectideas.com/api/JWT/DeleteTask?itemId=${id}`);
+    return this.http.delete(`https://api.freeprojectapi.com/api/GoalTracker/deleteTask/${id}`);
   }
 }

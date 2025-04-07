@@ -62,11 +62,11 @@
 
 <div class="modal form-container" #createtaskmodal>
     <!-- create task modal -->
-    <form [formGroup]="addtaskform" (ngSubmit)="createNewTask()">
+    <form [formGroup]="addtaskform">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="modal-title" id="exampleModalLabel">{{!this.editflag ? 'Create New Task' : 'Update Task'
+                    <div class="modal-title" id="exampleModalLabel">{{!this.editflag ? 'Create Task' : 'Update Task'
                         }}</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         (click)="closemodal()"></button>
@@ -75,20 +75,32 @@
                     <div class="row gy-3">
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Task Name</label>
-                            <input class="form-control" id="disabledInput" type="text" formControlName="taskname"
+                            <input class="form-control" id="disabledInput" type="text" formControlName="taskName"
                                 placeholder="Disabled input here..." [disabled]="editflag">
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Task Description</label>
-                            <input type="text" class="form-control" formControlName="taskdescription">
+                            <input type="text" class="form-control" formControlName="description">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="">Task Frequency</label>
+                            <select formControlName="frequency" id="">
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select>
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Create Date</label>
-                            <input type="date" class="form-control" formControlName="createdOn">
+                            <input type="date" class="form-control" formControlName="createdDate">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" formControlName="startDate">
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Due Date</label>
-                            <input type="date" class="form-control" formControlName="duedate">
+                            <input type="date" class="form-control" formControlName="dueDate">
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Select Status</label>
@@ -101,10 +113,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-main"
-                        (click)="this.editflag ?  updateTask() : createNewTask() ">{{this.editflag ? 'Update' :
-                        'Submit'}}
-                    </button>
+                    <button class="btn-main" (click)="this.editflag ? updateTask() : createNewTask()">{{this.editflag ?
+                        'Update' :
+                        'Create'}} </button>
+                    <!-- <button class="btn btn-main" (click)="createNewTask()">Submit</button>
+                    <button (click)="updateTask()">Update</button> -->
                 </div>
             </div>
         </div>
