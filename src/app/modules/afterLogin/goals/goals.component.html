@@ -1,0 +1,127 @@
+<div class="container-fluid">
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <h4>Goal Management</h4>
+                <button class="btn btn-main" (click)="createmodal()">
+                    <i class="fa-solid fa-plus"></i>
+                    Create Goals
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Sr. No.</td>
+                            <td>Goal Name</td>
+                            <td>Description</td>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                            <td>Is Achieved</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let goal of goalsArraytbl; let i=index">
+                            <td>{{i+1}} </td>
+                            <td>{{goal.goalName}} </td>
+                            <td>{{goal.description}} </td>
+                            <td>{{goal.startDate}} </td>
+                            <td>{{goal.endDate}} </td>
+                            <td>{{goal.isAchieved}} </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal form-container" #creategoalmodal>
+    <form [formGroup]="addgoalsform">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="exampleModalLabel">Create Goal</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closemodal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row gy-3">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Goal Name</label>
+                            <input class="form-control" id="disabledInput" type="text" formControlName="goalName"
+                                placeholder="Disabled input here...">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Goal Description</label>
+                            <input type="text" class="form-control" formControlName="description">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" formControlName="startDate">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">End Date</label>
+                            <input type="date" class="form-control" formControlName="endDate">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="form-label">Is Achieved</label>
+                            <select class="form-select" formControlName="isAchieved">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div formArrayName="milestones">
+                            <div *ngFor="let milestone of milestones.controls; let i = index" [formGroupName]="i">
+                                <div class="col-sm-12">
+                                    <label class="form-label">Milestone Name</label>
+                                    <input class="form-control" type="text" formControlName="milestoneName"
+                                        placeholder="Milestone name..." />
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label class="form-label">Milestone Description</label>
+                                    <input class="form-control" type="text" formControlName="description"
+                                        placeholder="Milestone description..." />
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label class="form-label">Target Date</label>
+                                    <input class="form-control" type="date" formControlName="targetDate" />
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label class="form-label">Is Completed</label>
+                                    <select class="form-select" formControlName="isCompleted">
+                                        <option [value]="true">Yes</option>
+                                        <option [value]="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
+                    <button class="btn-main" (click)="submitgoals()">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

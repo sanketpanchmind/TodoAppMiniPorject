@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('../../modules/beforeLogin/login/login.module').then(m => m.LoginModule) },
   { path: 'task-manager', loadChildren: () => import('../../modules/afterLogin/task-manager/task-manager.module').then(m => m.TaskManagerModule) },
   { path: 'dashboard', loadChildren: () => import('../../modules/afterLogin/dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'goals', loadChildren: () => import('../../modules/afterLogin/goals/goals.module').then(m => m.GoalsModule) },
 
 
 
