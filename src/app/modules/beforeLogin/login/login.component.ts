@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,9 @@ export class LoginComponent {
   registerform: FormGroup | any;
   loginform: FormGroup | any;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) {
+    // this.registerfields();
+    // this.loginformfields();
 
   }
 
@@ -72,7 +75,8 @@ export class LoginComponent {
     this.http.post('https://api.freeprojectapi.com/api/GoalTracker/login', params).subscribe({
       next: (res: any) => {
         console.log("Current usser - ", res);
-        localStorage.setItem('Currentuser', JSON.stringify(res));
+        // localStorage.setItem('Currentuser', JSON.stringify(res));
+        this.authService.setUser(res);
         this.router.navigateByUrl('/dashboard');
       },
       error: (error: any) => {
