@@ -12,3 +12,14 @@ nav{
 nav ul li a{
     color: #fff;
 }
+
+.dropdown-menu{
+    background-color: #ccc !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 53px !important;
+    left: -32px !important;
+    border-radius: 0;
+}

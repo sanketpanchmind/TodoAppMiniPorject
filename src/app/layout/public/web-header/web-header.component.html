@@ -14,15 +14,31 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
+                    <a class="nav-link " aria-current="page" routerLink="login">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/task-manager">Task Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/goals">Goals</a>
-                </li>
-
+                <ng-container *ngIf="loggedInUser" >
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/task-manager">Task Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/goals">Goals</a>
+                    </li>
+                    <li >
+                        <div class="dropdown">
+                            <a class="nav-link bg-transparent" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Profile Info
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">LoggedIn User</a></li>
+                                <li><a class="dropdown-item" href="#" (click)="logout()">logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ng-container>
             </ul>
             <!-- <button class="btn btn-primary" routerLink="/login">Login</button> -->
         </div>

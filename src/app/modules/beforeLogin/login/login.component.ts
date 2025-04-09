@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import gsap from 'gsap';
 import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
@@ -19,6 +20,13 @@ export class LoginComponent {
     // this.registerfields();
     // this.loginformfields();
 
+  }
+  @ViewChild('loginBox') loginBox!: ElementRef;
+  @ViewChild('registerBox') registerBox!: ElementRef;
+
+  ngAfterViewInit() {
+    // Start with showing register, hide login
+    gsap.set(this.loginBox.nativeElement, { y: -500, autoAlpha: 0 }); // autoAlpha = opacity + visibility
   }
 
   ngOnInit() {
