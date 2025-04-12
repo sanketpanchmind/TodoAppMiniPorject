@@ -15,6 +15,7 @@ export class LoginComponent {
 
   registerform: FormGroup | any;
   loginform: FormGroup | any;
+  login: boolean = true;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) {
     // this.registerfields();

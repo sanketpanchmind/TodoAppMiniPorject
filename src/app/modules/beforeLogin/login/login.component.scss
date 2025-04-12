@@ -1,30 +1,4 @@
-:root {
-    --background: #1a1a2e;
-    --color: #ffffff;
-    --primary-color: #0f3460;
-}
 
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "poppins";
-    background: var(--background);
-    color: var(--color);
-    letter-spacing: 1px;
-    transition: background 0.2s ease;
-    -webkit-transition: background 0.2s ease;
-    -moz-transition: background 0.2s ease;
-    -ms-transition: background 0.2s ease;
-    -o-transition: background 0.2s ease;
-}
 
 a {
     text-decoration: none;
@@ -39,12 +13,15 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
+    height: 100%;
+}   
 
 .login-container {
     position: relative;
-    width: 22.2rem;
+    width: 500px;
+    margin-top: 100px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.8);
+
 }
 .form-container {
     border: 1px solid hsla(0, 0%, 65%, 0.158);
@@ -64,28 +41,42 @@ h1 {
     padding: 14.5px;
     width: 100%;
     margin: 2rem 0;
-    color: var(--color);
+    color: var(--color) !important;  /* Ensure text color stays */
+    background-color: #9191911f !important; /* Prevent autofill bg color */
     outline: none;
-    background-color: #9191911f;
     border: none;
     border-radius: 5px;
     font-weight: 500;
     letter-spacing: 0.8px;
     font-size: 15px;
     backdrop-filter: blur(15px);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    box-shadow: none;
 }
 
-.login-container form input:focus {
-    box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
-    animation: wobble 0.3s ease-in;
-    -webkit-animation: wobble 0.3s ease-in;
+/* Autofill fix for Chrome */
+.login-container form input:-webkit-autofill,
+.login-container form input:-webkit-autofill:hover,
+.login-container form input:-webkit-autofill:focus,
+.login-container form input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color) !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #9191911f inset !important; /* match your input bg */
+    -webkit-text-fill-color: var(--color) !important; /* keep your desired text color */
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: var(--color); /* keep caret color matching */
+  }
+  
+
+// .login-container form input:focus {
+//     box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
+//     animation: wobble 0.3s ease-in;
+//     -webkit-animation: wobble 0.3s ease-in;
+// }
 
 .login-container form button {
+    position: relative;
     background-color: var(--primary-color);
     color: var(--color);
     display: block;
@@ -164,6 +155,7 @@ h1 {
     margin: 1rem 0;
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 .opacity {
     opacity: 0.6;
@@ -214,3 +206,50 @@ h1 {
         -o-transform: scale(1);
     }
 }
+
+
+
+
+// *********
+.register-container{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 500px;
+    transform: translate(-50%, 20%);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.8);
+}
+.register-container form input {
+        display: block;
+        padding: 14.5px;
+        width: 100%;
+        margin: 2rem 0;
+        color: var(--color);
+        outline: none;
+        background-color: #9191911f;
+        border: none;
+        border-radius: 5px;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+        font-size: 15px;
+        backdrop-filter: blur(15px);
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+    }
+
+    .register-container button{
+        width: 100%;
+        padding: 10px 0;
+        border: 0;
+        border-radius: 15px;
+    }
+
+    .login-forget a{
+        // color: blue;
+        // text-decoration: underline;
+        font-weight: 600;
+        width: 100%;
+        cursor: pointer;
+    }

@@ -44,20 +44,22 @@
 </div>
  -->
 
- <body>
+<ng-container *ngIf="login">
+
     <section class="container">
         <div class="login-container">
             <div class="circle circle-one"></div>
             <div class="form-container">
-                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
+                    alt="illustration" class="illustration" />
                 <h1 class="opacity">LOGIN</h1>
-                <form>
+                <form [formGroup]="loginform" (ngSubmit)="submit()">
                     <input type="text" placeholder="USERNAME" />
                     <input type="password" placeholder="PASSWORD" />
-                    <button class="opacity">SUBMIT</button>
+                    <button class=" btn-main" type="submit">SUBMIT</button>
                 </form>
                 <div class="register-forget opacity">
-                    <a href="">REGISTER</a>
+                    <a (click)="login = false ">REGISTER</a>
                     <a href="">FORGOT PASSWORD</a>
                 </div>
             </div>
@@ -65,4 +67,40 @@
         </div>
         <div class="theme-btn-container"></div>
     </section>
-</body>
+</ng-container>
+
+<ng-container *ngIf="!login">
+    <section class="container">
+        <div class="register-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
+                    alt="illustration" class="illustration" />
+                <h1 class="opacity">Register</h1>
+                <form [formGroup]="registerform" (ngSubmit)="register()">
+                    <div class="mb-2">
+                        <input type="text" id="fullName" formControlName="fullName" placeholder="Full name" required />
+                    </div>
+                    <div class="mb-2">
+                        <input type="text" id="fullName" formControlName="emailId" placeholder="Email ID" required />
+                    </div>
+                    <div class="mb-2">
+                        <input type="text" id="fullName" formControlName="password" placeholder="Password" required />
+                    </div>
+                    <div class="mb-2">
+                        <input type="text" id="fullName" formControlName="mobileNo" placeholder="Mobile Number"
+                            required />
+                    </div>
+                    <div class="mb-2">
+                        <button type="submit" class="btn-main">SUBMIT</button>
+                    </div>
+                </form>
+                <div class="login-forget opacity text-center">
+                    <a (click)="login=true">LOGIN</a>
+                </div>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+</ng-container>
