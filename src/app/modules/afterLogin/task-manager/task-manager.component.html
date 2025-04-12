@@ -78,30 +78,57 @@
                             <label for="exampleInputEmail1" class="form-label">Task Name</label>
                             <input class="form-control" id="disabledInput" type="text" formControlName="taskName"
                                 placeholder="Disabled input here..." [disabled]="editflag">
+                            <!-- <div class="text-danger" *ngIf="f['taskName']?.invalid">jsdvnjksdvnjvskvb -->
+                            <div class="text-danger"
+                                *ngIf="f['taskName'].touched && f['taskName'].errors?.['required']">
+                                Name is required
+                            </div>
+                            <div class="text-danger" *ngIf="f['taskName'].errors?.['pattern']">
+                                Invalid Name
+                            </div>
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Task Description</label>
                             <input type="text" class="form-control" formControlName="description">
+                            <div class="text-danger"
+                                *ngIf="f['description'].touched && f['description'].errors?.['required']">
+                                Description is required
+                            </div>
                         </div>
                         <div class="col-sm-12">
-                            <label for="">Task Frequency</label>
-                            <select formControlName="frequency" id="">
+                            <div>Task Frequency</div>
+                            <select class="form-control" formControlName="frequency" id="">
                                 <option value="Daily">Daily</option>
                                 <option value="Weekly">Weekly</option>
                                 <option value="Monthly">Monthly</option>
                             </select>
+                            <div class="text-danger"
+                                *ngIf="f['frequency'].touched && f['frequency'].errors?.['required']">
+                                Frequency is required
+                            </div>
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Create Date</label>
                             <input type="date" class="form-control" formControlName="createdDate">
+                            <div class="text-danger"
+                                *ngIf="f['createdDate'].touched && f['createdDate'].errors?.['required']">
+                                createdDate is required
+                            </div>
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Start Date</label>
                             <input type="date" class="form-control" formControlName="startDate">
+                            <div class="text-danger"
+                                *ngIf="f['startDate'].touched && f['startDate'].errors?.['required']">
+                                startDate is required
+                            </div>
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Due Date</label>
                             <input type="date" class="form-control" formControlName="dueDate">
+                            <div class="text-danger" *ngIf="f['dueDate'].touched && f['dueDate'].errors?.['required']">
+                                startDate is required
+                            </div>
                         </div>
                         <div class="col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Select Status</label>
@@ -109,12 +136,17 @@
                                 <option value="true">Yes</option>
                                 <option value="false" checked>No</option>
                             </select>
+                            <div class="text-danger"
+                                *ngIf="f['isCompleted'].touched && f['isCompleted'].errors?.['required']">
+                                startDate is required
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
-                    <button class="btn-main" (click)="this.editflag ? updateTask() : createNewTask()">{{this.editflag ?
+                    <button type="submit" class="btn-main"
+                        (click)="this.editflag ? updateTask() : createNewTask()">{{this.editflag ?
                         'Update' :
                         'Create'}} </button>
                     <!-- <button class="btn btn-main" (click)="createNewTask()">Submit</button>

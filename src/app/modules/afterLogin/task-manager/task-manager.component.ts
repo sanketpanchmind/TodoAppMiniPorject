@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskManagementService } from 'src/app/core/service/task-management.service';
 
 @Component({
@@ -32,16 +32,18 @@ export class TaskManagerComponent {
     }
 
   }
-
+  get f() {
+    return this.addtaskform.controls;
+  }
   createform() {
     this.addtaskform = this.fb.group({
-      taskName: new FormControl(''),
-      description: new FormControl(''),
-      frequency: new FormControl(''),
-      createdDate: new FormControl(''),
-      startDate: new FormControl(''),
-      dueDate: new FormControl(''),
-      isCompleted: new FormControl('false'),
+      taskName: new FormControl('', [Validators.required, Validators.pattern('^[A-Z-a-z ]+$')]),
+      description: new FormControl('', [Validators.required]),
+      frequency: new FormControl('', [Validators.required]),
+      createdDate: new FormControl('', [Validators.required]),
+      startDate: new FormControl('', [Validators.required]),
+      dueDate: new FormControl('', [Validators.required]),
+      isCompleted: new FormControl('false', [Validators.required]),
     })
   }
 
@@ -87,6 +89,9 @@ export class TaskManagerComponent {
   // }
 
   createNewTask() {
+    if (this.addtaskform.invalid) {
+      return;
+    }
     console.log(this.addtaskform.value);
     let obj = this.addtaskform.value;
 

@@ -15,7 +15,7 @@ nav ul li a{
 }
 
 .dropdown-menu{
-    background-color: #ccc !important;
+    background-color: #f48b37 !important;
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -23,4 +23,14 @@ nav ul li a{
     top: 53px !important;
     left: -32px !important;
     border-radius: 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: var(--bs-dropdown-link-active-color);
+    text-decoration: none;
+    background-color: #f48b37 !important;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    color: var(--bs-dropdown-link-hover-color);
+    background-color: #f48b37;
 }

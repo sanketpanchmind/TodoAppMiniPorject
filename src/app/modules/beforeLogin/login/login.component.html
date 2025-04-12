@@ -54,8 +54,8 @@
                     alt="illustration" class="illustration" />
                 <h1 class="opacity">LOGIN</h1>
                 <form [formGroup]="loginform" (ngSubmit)="submit()">
-                    <input type="text" placeholder="USERNAME" />
-                    <input type="password" placeholder="PASSWORD" />
+                    <input type="text" placeholder="USERNAME" formControlName="loginemailId" />
+                    <input type="password" placeholder="PASSWORD" formControlName="loginpassword" />
                     <button class=" btn-main" type="submit">SUBMIT</button>
                 </form>
                 <div class="register-forget opacity">
