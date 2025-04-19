@@ -30,7 +30,6 @@ export class TaskManagerComponent {
       this.currentuserid = currentuser.userId;
       console.log(this.currentuserid);
     }
-
   }
   get f() {
     return this.addtaskform.controls;
@@ -46,7 +45,7 @@ export class TaskManagerComponent {
       createdDate: new FormControl('', [Validators.required]),
       startDate: new FormControl('', [Validators.required]),
       dueDate: new FormControl('', [Validators.required]),
-      isCompleted: new FormControl('false', [Validators.required]),
+      isCompleted: new FormControl('', [Validators.required]),
     })
   }
 
@@ -92,6 +91,9 @@ export class TaskManagerComponent {
   // }
 
   createNewTask() {
+    this.editflag = false;
+    console.log(this.editflag);
+
     if (this.addtaskform.invalid) {
       return;
     }
@@ -119,9 +121,25 @@ export class TaskManagerComponent {
       this.taskservice.createtask(params).subscribe({
         next: (res: any) => {
           console.log("tasks created--", res);
-          localStorage.setItem('Tasks', JSON.stringify(res));
+          // ✅ Step 1: Get existing tasks from localStorage
+          const storedTasks = localStorage.getItem('Tasks');
+          let tasksList: any[] = [];
+          try {
+            if (storedTasks) {
+              const parsed = JSON.parse(storedTasks);
+              tasksList = Array.isArray(parsed) ? parsed : Object.values(parsed);
+            }
+          } catch (e) {
+            console.error("Error parsing tasks from localStorage:", e);
+          }
+          // ✅ Step 2: Push new task
+          tasksList.push(res);
+
+          // ✅ Step 3: Save updated task list to localStorage
+          localStorage.setItem('Tasks', JSON.stringify(tasksList));
           this.getAllTasks();
           this.closemodal();
+          this.clear();
         },
         error: (error: any) => {
           console.log(error);
@@ -132,6 +150,7 @@ export class TaskManagerComponent {
 
   editTask(params: any) {
     this.editflag = true;
+    console.log("EDIT FLAG VAL - ", this.editflag);
     console.log("params", params);
     console.log("params usr id", params.userId);
 
@@ -201,15 +220,17 @@ export class TaskManagerComponent {
 
     const updatedTask = {
       taskId: this.taskid,
+      task: this.addtaskform.value.taskName,  // ✅ Required by backend
       taskName: this.addtaskform.value.taskName,
       description: this.addtaskform.value.description,
       frequency: this.addtaskform.value.frequency,
       createdDate: this.addtaskform.value.createdDate,
       startDate: this.addtaskform.value.startDate,
       dueDate: this.addtaskform.value.dueDate,
-      isCompleted: this.addtaskform.value.isCompleted,
+      isCompleted: !!this.addtaskform.value.isCompleted,  // ✅ Force boolean
       userId: this.currentuserid,
     };
+
 
     console.log("update Task - ", updatedTask);
     this.taskservice.editTask(updatedTask).subscribe({
@@ -247,6 +268,10 @@ export class TaskManagerComponent {
     this.taskservice.delete(tasklist.taskId).subscribe({
       next: (res: any) => {
         console.log("delete id ", res);
+        localStorage.removeItem('Tasks');
+        this.tasklisttblArray = this.tasklisttblArray.filter((task: any) => task.taskId !== tasklist.taskId);
+        localStorage.setItem('Tasks', JSON.stringify(this.tasklisttblArray));
+
       },
       error: (error: any) => {
         console.error(error);
