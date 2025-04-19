@@ -37,7 +37,11 @@ export class DashboardComponent {
 
   ngOnInit() {
 
+    console.log("data length - ", this.dataLength);
+    console.log("data length - ", this.completed);
+    console.log("data length - ", this.pending);
     // this.getdatatasks();
+    this.updatechart();
 
   }
 
