@@ -40,27 +40,33 @@ export class DashboardComponent {
     console.log("data length - ", this.dataLength);
     console.log("data length - ", this.completed);
     console.log("data length - ", this.pending);
-    // this.getdatatasks();
+    this.getdatatasks();
     this.updatechart();
 
   }
 
-  // getdatatasks() {
-  //   this.taskService.getAlltaskList().subscribe({
-  //     next: (res: any) => {
-  //       console.log(res.data);
-  //       console.log(res.data.length);
-  //       this.dataLength = res.data.length;
+  getdatatasks() {
+    const localdata = localStorage.getItem('Currentuser');
+    if (localdata) {
+      console.log(localdata);
+      const localuser = JSON.parse(localdata);
+      console.log("local user -- ", localuser.userId);
+      this.taskService.getAlltaskList(localuser.userId).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          console.log(res.length);
+          this.dataLength = res.length;
 
-  //       this.completed = res.data.filter((data: any) => data.isCompleted == true).length;
-  //       console.log(this.completed);
+          this.completed = res.filter((data: any) => data.isCompleted == true).length;
+          console.log(this.completed);
 
-  //       this.pending = res.data.filter((data: any) => data.isCompleted == false).length;
-  //       this.updatechart();
+          this.pending = res.filter((data: any) => data.isCompleted == false).length;
+          this.updatechart();
 
-  //     }
-  //   })
-  // }
+        }
+      })
+    }
+  }
 
   updatechart() {
     this.chartOptions = {
