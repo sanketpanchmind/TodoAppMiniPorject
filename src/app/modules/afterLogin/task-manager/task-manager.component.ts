@@ -268,9 +268,9 @@ export class TaskManagerComponent {
     this.taskservice.delete(tasklist.taskId).subscribe({
       next: (res: any) => {
         console.log("delete id ", res);
-        localStorage.removeItem('Tasks');
-        this.tasklisttblArray = this.tasklisttblArray.filter((task: any) => task.taskId !== tasklist.taskId);
-        localStorage.setItem('Tasks', JSON.stringify(this.tasklisttblArray));
+        // localStorage.removeItem('Tasks');
+        // this.tasklisttblArray = this.tasklisttblArray.filter((task: any) => task.taskId !== tasklist.taskId);
+        // localStorage.setItem('Tasks', JSON.stringify(this.tasklisttblArray));
 
       },
       error: (error: any) => {
