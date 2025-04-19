@@ -1,16 +1,15 @@
 <div class="container-fluid">
-    <div class="card border-0 shadow-sm">
-
-        <div class="card-header">
+    <div class="card border-0 shadow-sm my-4">
+        <div class="card-header border-0">
             <div class="d-flex align-items-center justify-content-between w-100">
-                <h4>Goal Management</h4>
+                <h4 class="text-main mb-0">Goal Management</h4>
                 <button class="btn btn-main" (click)="createmodal()">
                     <i class="fa-solid fa-plus"></i>
                     Create Goals
                 </button>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body pt-0">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -29,13 +28,21 @@
                             <td>{{i+1}} </td>
                             <td>{{goal.goalName}} </td>
                             <td>{{goal.description}} </td>
-                            <td>{{goal.startDate}} </td>
-                            <td>{{goal.endDate}} </td>
-                            <td>{{goal.isAchieved}} </td>
+                            <td>{{goal.startDate | date}} </td>
+                            <td>{{goal.endDate | date}} </td>
                             <td>
-                                <div class="d-flex gap-2 action-btns">
-                                    <button class="btn bg-primary-subtle text-primary"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn bg-danger-subtle text-danger"><i class="fa-solid fa-trash"></i></button>
+                                <div *ngIf="goal.isAchieved" class="badge rounded-pill bg-success-subtle text-success">
+                                    <!-- {{goal.isAchieved}} --> Completed
+                                </div>
+                                <div *ngIf="!goal.isAchieved" class="badge rounded-pill bg-danger-subtle text-danger">
+                                    <!-- {{goal.isAchieved}} --> Not Completed
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-0 action-btns">
+                                    <button class="btn bg-main-light text-main"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn text-danger"><i class="fa-solid fa-trash"></i></button>
                                 </div>
                             </td>
                         </tr>

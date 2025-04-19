@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/todo-app-mini-porject",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

@@ -1,17 +1,15 @@
 <div class="container-fluid">
     <div class="card border-0 shadow-sm">
-        <p class="text-success-emphasis fw-bold">sdfsadfaassdf</p>
-
-        <div class="card-header">
+        <div class="card-header border-0">
             <div class="d-flex align-items-center justify-content-between w-100">
-                <h4>Task Management</h4>
+                <h4 class="text-main mb-0">Task Management</h4>
                 <button class="btn btn-main" (click)="createtask()">
                     <i class="fa-solid fa-plus"></i>
                     Create Task
                 </button>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body pt-0">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -42,10 +40,10 @@
                                 <!-- {{tasklist.isCompleted}} -->
                             </td>
                             <td>
-                                <div class="d-flex gap-2 action-btns">
-                                    <button class="btn bg-primary-subtle text-primary" (click)="editTask(tasklist)"><i
+                                <div class="d-flex gap-0 action-btns">
+                                    <button class="btn bg-main-light text-main" (click)="editTask(tasklist)"><i
                                             class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn bg-danger-subtle text-danger" (click)="deletetask(tasklist)"><i
+                                    <button class="btn  text-danger" (click)="deletetask(tasklist)"><i
                                             class="fa-solid fa-trash"></i></button>
                                 </div>
                             </td>
@@ -64,20 +62,20 @@
 <div class="modal form-container" #createtaskmodal>
     <!-- create task modal -->
     <form [formGroup]="addtaskform">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-main">
                     <div class="modal-title" id="exampleModalLabel">{{!this.editflag ? 'Create Task' : 'Update Task'
                         }}</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         (click)="closemodal()"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row gy-3">
-                        <div class="col-sm-12">
+                    <div class="row align-items-center gy-3">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Task Name</label>
                             <input class="form-control" id="disabledInput" type="text" formControlName="taskName"
-                                placeholder="Disabled input here..." [disabled]="editflag">
+                                placeholder="" [disabled]="editflag">
                             <!-- <div class="text-danger" *ngIf="f['taskName']?.invalid">jsdvnjksdvnjvskvb -->
                             <div class="text-danger"
                                 *ngIf="f['taskName'].touched && f['taskName'].errors?.['required']">
@@ -87,7 +85,7 @@
                                 Invalid Name
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Task Description</label>
                             <input type="text" class="form-control" formControlName="description">
                             <div class="text-danger"
@@ -95,8 +93,8 @@
                                 Description is required
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div>Task Frequency</div>
+                        <div class="col-sm-6">
+                            <div class="mt-2 form-label">Task Frequency</div>
                             <select class="form-control" formControlName="frequency" id="">
                                 <option value="Daily">Daily</option>
                                 <option value="Weekly">Weekly</option>
@@ -107,7 +105,7 @@
                                 Frequency is required
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Create Date</label>
                             <input type="date" class="form-control" formControlName="createdDate">
                             <div class="text-danger"
@@ -115,7 +113,7 @@
                                 createdDate is required
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Start Date</label>
                             <input type="date" class="form-control" formControlName="startDate">
                             <div class="text-danger"
@@ -123,14 +121,14 @@
                                 startDate is required
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Due Date</label>
                             <input type="date" class="form-control" formControlName="dueDate">
                             <div class="text-danger" *ngIf="f['dueDate'].touched && f['dueDate'].errors?.['required']">
                                 startDate is required
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Select Status</label>
                             <select class="form-select" formControlName="isCompleted">
                                 <option value="true">Yes</option>
@@ -144,8 +142,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn-main"
+                    <button type="button" class="btn btn-main-light" data-bs-dismiss="modal"
+                        (click)="clear()">Clear</button>
+                    <button type="submit" class="btn btn-main"
                         (click)="this.editflag ? updateTask() : createNewTask()">{{this.editflag ?
                         'Update' :
                         'Create'}} </button>

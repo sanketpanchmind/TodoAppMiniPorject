@@ -6,6 +6,10 @@ body{
     font-style: normal;
     font-optical-sizing: auto;
 }
+:root{
+    --main-color: #6D28D9;
+    --main-color-light: #8b5cf65e;
+}
 
 .form-container .form-label{
     font-size: 0.85rem !important;
@@ -15,13 +19,19 @@ body{
     font-size: 0.85rem !important;
     font-weight: 700;
 }
-
+.bg-main{
+    background-color: #6D28D9 !important;
+}
+.text-main{
+    color: #6D28D9 !important;
+}
 .btn-main{
-    background-color: #f48b37 !important;
+    background-color: #6D28D9 !important;
     color: #fff !important;
 }
 .btn-main-light{
-    background-color: #f8700282 !important;
+    background-color: #C4B5FD !important;
+    color: #4C1D95 !important;
     
 }
 
@@ -30,6 +40,10 @@ body{
     font-size: 0.82rem !important;
 }
 
+table thead tr td{
+    background-color: var(--main-color-light) !important;
+    color: var(--main-color);
+}
 table thead tr td{
     font-size: 0.85rem !important;
     font-weight: 700 !important;

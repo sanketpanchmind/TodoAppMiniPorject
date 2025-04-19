@@ -35,6 +35,9 @@ export class TaskManagerComponent {
   get f() {
     return this.addtaskform.controls;
   }
+  clear() {
+    this.addtaskform.reset();
+  }
   createform() {
     this.addtaskform = this.fb.group({
       taskName: new FormControl('', [Validators.required, Validators.pattern('^[A-Z-a-z ]+$')]),
