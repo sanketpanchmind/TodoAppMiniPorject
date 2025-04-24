@@ -68,6 +68,7 @@ input:-webkit-autofill {
 
 
 .login-container form button {
+    z-index: 99999 !important;
     position: relative;
     background-color: var(--primary-color);
     color: var(--color);
