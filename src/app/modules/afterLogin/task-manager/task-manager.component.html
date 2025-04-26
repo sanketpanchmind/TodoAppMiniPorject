@@ -132,7 +132,7 @@
                             <label for="exampleInputEmail1" class="form-label">Select Status</label>
                             <select class="form-select" formControlName="isCompleted">
                                 <option value="true">Yes</option>
-                                <option value="false" checked>No</option>
+                                <option value="false">No</option>
                             </select>
                             <div class="text-danger"
                                 *ngIf="f['isCompleted'].touched && f['isCompleted'].errors?.['required']">

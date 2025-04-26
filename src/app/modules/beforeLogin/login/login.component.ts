@@ -83,6 +83,7 @@ export class LoginComponent {
         // localStorage.setItem('Currentuser', JSON.stringify(res));
         this.authService.setUser(res);
         this.router.navigateByUrl('/dashboard');
+        window.location.href = '/dashboard';
       },
       error: (error: any) => {
         console.log(error);

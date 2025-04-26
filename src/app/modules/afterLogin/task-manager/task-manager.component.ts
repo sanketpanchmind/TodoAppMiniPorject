@@ -107,16 +107,18 @@ export class TaskManagerComponent {
       const currentuserid = currentuser.userId;
 
       const params: any = {
+        task: obj?.taskName,
         taskName: obj?.taskName,
         description: obj?.description,
         frequency: obj?.frequency,
         createdDate: obj?.createdDate,
         startDate: obj?.startDate,
         dueDate: obj?.dueDate,
-        isCompleted: false,
+        isCompleted: obj?.isCompleted === true || obj?.isCompleted === 'true' ? true : false,
         userId: currentuserid,
       };
       console.log(params);
+      console.log("is Completed - ", params.isCompleted, typeof (params.isCompleted));
 
       this.taskservice.createtask(params).subscribe({
         next: (res: any) => {
