@@ -99,7 +99,7 @@ export class GoalsComponent {
       milestones: obj?.milestones.map((m: any) => ({
         milestoneName: m.milestoneName,
         description: m.description,
-        targetDate: m.targetDate,
+        targetDate: new Date(),
         isCompleted: Boolean(m.isCompleted),
       }))
     }

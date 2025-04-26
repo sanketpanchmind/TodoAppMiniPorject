@@ -33,3 +33,21 @@ nav ul li a{
     color: var(--bs-dropdown-link-hover-color);
     background-color: #f48b37;
 }
+
+.form-container .form-label{
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #ccc;
+    margin: 0 !important;
+}
+
+.form-container .form-data{
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #000;
+}
+
+.modal-title{
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+}

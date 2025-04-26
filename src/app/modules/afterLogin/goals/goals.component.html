@@ -59,40 +59,40 @@
 
 <div class="modal form-container" #creategoalmodal>
     <form [formGroup]="addgoalsform">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content border-0">
+                <div class="modal-header bg-main text-white">
                     <div class="modal-title" id="exampleModalLabel">Create Goal</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         (click)="closemodal()"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row gy-3">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Goal Name</label>
                             <input class="form-control" id="disabledInput" type="text" formControlName="goalName"
                                 placeholder="Disabled input here...">
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Goal Description</label>
                             <input type="text" class="form-control" formControlName="description">
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Start Date</label>
                             <input type="date" class="form-control" formControlName="startDate">
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">End Date</label>
                             <input type="date" class="form-control" formControlName="endDate">
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Is Achieved</label>
                             <select class="form-select" formControlName="isAchieved">
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>
                         </div>
-                        <div formArrayName="milestones">
+                        <!-- <div formArrayName="milestones">
                             <div *ngFor="let milestone of milestones.controls; let i = index" [formGroupName]="i">
                                 <div class="col-sm-12">
                                     <label class="form-label">Milestone Name</label>
@@ -119,13 +119,13 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
-                    <button class="btn-main" (click)="submitgoals()">Submit</button>
+                    <button class="btn btn-main" (click)="submitgoals()">Submit</button>
 
                 </div>
             </div>

@@ -20,9 +20,9 @@
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/task-manager">Task Management</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" routerLink="/goals">Goals</a>
-                    </li>
+                    </li> -->
                     <li>
                         <div class="dropdown">
                             <a class="nav-link bg-transparent" type="button" data-bs-toggle="dropdown"
@@ -30,7 +30,8 @@
                                 Profile Info
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">LoggedIn User</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">LoggedIn User</a></li>
                                 <li><a class="dropdown-item" href="#" (click)="logout()">logout</a></li>
                             </ul>
                         </div>
@@ -41,3 +42,49 @@
         </div>
     </div>
 </nav>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-main text-white py-2">
+                <div class="modal-title fs-5 mb-0" id="exampleModalLabel">User Profile</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body form-container">
+                <div class="row gy-3">
+                    <div class="col-sm-6">
+                        <div class="d-flex flex-column gap-0">
+                            <div class="form-label">Name</div>
+                            <div class="form-data">{{user.fullName}} </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex flex-column gap-0">
+                            <div class="form-label">Email ID</div>
+                            <div class="form-data"> {{user.emailId}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex flex-column gap-0">
+                            <div class="form-label">Mobile Number</div>
+                            <div class="form-data">{{user.mobileNo}} </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex flex-column gap-0">
+                            <div class="form-label">Account Creation Date</div>
+                            <div class="form-data"> {{user.createdDate | date}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-main-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-main">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

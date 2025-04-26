@@ -11,25 +11,32 @@ export class WebHeaderComponent {
 
   loggedInUser: boolean = false;
   currentuser: string = '';
+  user: any;
 
   constructor(private authService: AuthService, private router: Router) {
-    
-   }
-   ngOnInit(){
-    if(this.authService.isLoggedIn()) {
+
+  }
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
       this.loggedInUser = this.authService.isLoggedIn();
-      console.log(this.loggedInUser);
-       const user = this.authService.getUser();
-       this.currentuser = user.emailId;
+      console.log("current user -", this.loggedInUser);
+      const user = this.authService.getUser();
+      this.currentuser = user.emailId;
+      this.currentUserInfo();
     }
-    else{
+    else {
       console.log('User not logged in', this.loggedInUser);
     }
-   }
+  }
 
-   logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-   }
-  
+  }
+
+  currentUserInfo() {
+    const currentUser = this.authService.getUser();
+    this.user = currentUser;
+    console.log("Current LoggedIn User Info - ", this.user);
+  }
 }
