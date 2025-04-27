@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/service/auth.service';
 import { TaskManagementService } from 'src/app/core/service/task-management.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class TaskManagerComponent {
   taskid: number = 0;
   @ViewChild('createtaskmodal') createtaskmodal!: ElementRef
 
-  constructor(private taskservice: TaskManagementService, public fb: FormBuilder) {
+  constructor(private taskservice: TaskManagementService, public fb: FormBuilder, private auth: AuthService) {
 
   }
   ngOnInit() {
@@ -50,11 +51,16 @@ export class TaskManagerComponent {
   }
 
   createtask() {
+    // this.editflag = false;                     // Reset to Create mode
+    // this.clear();                              // Reset the form fields
     this.createtaskmodal.nativeElement.style.display = 'block';
   }
 
+
   closemodal() {
     this.createtaskmodal.nativeElement.style.display = 'none';
+    this.editflag = !this.editflag;
+    console.log("modal closed", this.editflag);
   }
 
 
@@ -78,187 +84,100 @@ export class TaskManagerComponent {
 
   }
 
-  //   {
-  //   "taskId": 0,
-  //     "taskName": "string",
-  //       "description": "string",
-  //         "frequency": "string",
-  //           "createdDate": "2025-04-07T15:13:45.509Z",
-  //             "startDate": "2025-04-07T15:13:45.509Z",
-  //               "dueDate": "2025-04-07T15:13:45.509Z",
-  //                 "isCompleted": false,
-  //                   "userId": 0
-  // }
-
   createNewTask() {
-    this.editflag = false;
     console.log(this.editflag);
 
-    if (this.addtaskform.invalid) {
-      return;
+    const user = this.auth.getUser();
+    console.log("current user - ", user);
+
+    const obj = this.addtaskform.value;
+
+    const params = {
+      task: obj?.taskName,
+      taskName: obj?.taskName,
+      description: 'Description',
+      frequency: obj?.frequency,
+      createdDate: obj?.createdDate,
+      startDate: obj?.createdDate,
+      dueDate: obj?.dueDate,
+      isCompleted: obj?.isCompleted === true || obj?.isCompleted === 'true' ? true : false,
+      userId: user?.userId
     }
-    console.log(this.addtaskform.value);
-    let obj = this.addtaskform.value;
+    console.log(params);
 
-    const id = localStorage.getItem('Currentuser');
-    if (id) {
-      const currentuser = JSON.parse(id);
-      console.log("current user id constructor-", currentuser);
-      const currentuserid = currentuser.userId;
-
-      const params: any = {
-        task: obj?.taskName,
-        taskName: obj?.taskName,
-        description: obj?.description,
-        frequency: obj?.frequency,
-        createdDate: obj?.createdDate,
-        startDate: obj?.startDate,
-        dueDate: obj?.dueDate,
-        isCompleted: obj?.isCompleted === true || obj?.isCompleted === 'true' ? true : false,
-        userId: currentuserid,
-      };
-      console.log(params);
-      console.log("is Completed - ", params.isCompleted, typeof (params.isCompleted));
-
-      this.taskservice.createtask(params).subscribe({
-        next: (res: any) => {
-          console.log("tasks created--", res);
-          // ✅ Step 1: Get existing tasks from localStorage
-          const storedTasks = localStorage.getItem('Tasks');
-          let tasksList: any[] = [];
-          try {
-            if (storedTasks) {
-              const parsed = JSON.parse(storedTasks);
-              tasksList = Array.isArray(parsed) ? parsed : Object.values(parsed);
-            }
-          } catch (e) {
-            console.error("Error parsing tasks from localStorage:", e);
-          }
-          // ✅ Step 2: Push new task
-          tasksList.push(res);
-
-          // ✅ Step 3: Save updated task list to localStorage
-          localStorage.setItem('Tasks', JSON.stringify(tasksList));
-          this.getAllTasks();
-          this.closemodal();
-          this.clear();
-        },
-        error: (error: any) => {
-          console.log(error);
-        }
-      })
-    }
+    this.taskservice.createtask(params).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.clear();
+        this.closemodal();
+        this.getAllTasks();
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
   }
 
   editTask(params: any) {
     this.editflag = true;
-    console.log("EDIT FLAG VAL - ", this.editflag);
-    console.log("params", params);
-    console.log("params usr id", params.userId);
+    console.log("**********edit fn ************", this.editflag);
 
-    console.log("task Id", params.taskId);
-    this.taskid = params.taskId;
+    const user = this.auth.getUser();
+    console.log("current user - ", user);
+    console.log("Values to be edited -- ", params);
 
-    const localuser = this.tasklisttblArray.find((data: any) => data.userId == params.userId);
-    console.log("user found in Array", localuser);
-    console.log("local user", localuser.description);
+    this.taskid = params.taskId;   // <--- SAVE taskId here!
+    console.log("Task ID to update --> ", this.taskid);
 
-    if (!this.addtaskform) {
-      console.log("form not init");
-      return;
+    if (params.createdDate && params.dueDate) {
+      const formattedstartdate = params.createdDate.split('T');
+      console.log("Start Date ----", formattedstartdate);
+
+      const formattedduedate = params.dueDate.split('T');
+      console.log("Due Date ---", formattedduedate);
+
+      this.addtaskform.patchValue({
+        task: params?.taskName,
+        taskName: params?.taskName,
+        description: 'Description',
+        frequency: params?.frequency,
+        createdDate: formattedstartdate[0],
+        startDate: formattedstartdate[0],
+        dueDate: formattedduedate[0],
+        isCompleted: params?.isCompleted === true || params?.isCompleted === 'true' ? true : false,
+        userId: user?.userId
+      });
     }
-    const formattedcreatedate = params.createdDate ? new Date(params.createdDate).toISOString().split('T')[0] : '';
-    console.log("create Date", formattedcreatedate);
-
-
-
-    const formattedduedate = params.dueDate ? new Date(params.dueDate).toISOString().split('T')[0] : '';
-    console.log("due Date", formattedduedate);
-
-    // Stored the task in localstorage and retrieved the items that API was not sending from local Storage to show the data to edit on form
-    const getuser = localStorage.getItem('Tasks');
-    if (!getuser) {
-      return;
-    }
-    console.log("get user - ", getuser);
-    const allTasks = JSON.parse(getuser);
-    const localdatauser = allTasks.find((task: any) => task.taskId === params.taskId);
-    // const localdatauser = JSON.parse(getuser);
-
-
-
-    console.log("local user - ", localdatauser);
-    console.log("local user desc", localdatauser.description, "start Date - ", localdatauser.startDate);
-
-    const formattedstartDate = localdatauser.startDate ? new Date(localdatauser.startDate).toISOString().split('T')[0] : '';
-    console.log("start Date", formattedstartDate);
-
-
-    this.addtaskform.patchValue({
-      taskName: params?.taskName,
-      description: localdatauser.description,
-      frequency: params?.frequency,
-      createdDate: formattedcreatedate,
-      startDate: formattedstartDate,
-      dueDate: formattedduedate,
-      isCompleted: false,
-      userId: params?.userId,
-    });
-    // console.log(params);
-
-    // console.log(newparams);
-
     this.createtask();
-
   }
 
   updateTask() {
-    if (!this.editflag) {
-      console.log("No task is being edited.");
-      return;
-    }
+    const obj = this.addtaskform.value;
+    const user = this.auth.getUser();
+    console.log("current user - ", user);
 
-    console.log("Updating Task:", this.addtaskform.value);
-
-    const updatedTask = {
+    const params = {
       taskId: this.taskid,
-      task: this.addtaskform.value.taskName,  // ✅ Required by backend
-      taskName: this.addtaskform.value.taskName,
-      description: this.addtaskform.value.description,
-      frequency: this.addtaskform.value.frequency,
-      createdDate: this.addtaskform.value.createdDate,
-      startDate: this.addtaskform.value.startDate,
-      dueDate: this.addtaskform.value.dueDate,
-      isCompleted: !!this.addtaskform.value.isCompleted,  // ✅ Force boolean
-      userId: this.currentuserid,
-    };
-
-
-    console.log("update Task - ", updatedTask);
-    this.taskservice.editTask(updatedTask).subscribe({
+      task: obj?.taskName,
+      taskName: obj?.taskName,
+      description: 'Description',
+      frequency: obj?.frequency,
+      createdDate: obj?.createdDate,
+      startDate: obj?.createdDate,
+      dueDate: obj?.dueDate,
+      isCompleted: obj?.isCompleted === true || obj?.isCompleted === 'true' ? true : false,
+      userId: user?.userId
+    }
+    console.log(params);
+    this.taskservice.editTask(params).subscribe({
       next: (res: any) => {
-        console.log("Task Updated Successfully:", res);
-
-        // 🔁 Update the task in tasklisttblArray
-        const index = this.tasklisttblArray.findIndex((task: any) => task.taskId === this.taskid);
-        if (index !== -1) {
-          this.tasklisttblArray[index] = {
-            ...this.tasklisttblArray[index],
-            ...updatedTask
-          };
-        }
-        // 💾 Save the updated task array to localStorage
-        localStorage.setItem('Tasks', JSON.stringify(this.tasklisttblArray));
-
-        this.getAllTasks(); // Optional if you're refreshing from backend
+        console.log("tasks updates", res);
         this.closemodal();
-        this.editflag = false;
-        this.addtaskform.reset();
       },
       error: (error: any) => {
-        console.error("Update Failed:", error);
+        console.error(error);
       }
-    });
+    })
   }
 
 

@@ -3,7 +3,7 @@
         <div class="card-header border-0">
             <div class="d-flex align-items-center justify-content-between w-100">
                 <h4 class="text-main mb-0">Task Management</h4>
-                <button class="btn btn-main" (click)="createtask()">
+                <button type="button" class="btn btn-main" (click)="createtask()">
                     <i class="fa-solid fa-plus"></i>
                     Create Task
                 </button>
@@ -41,9 +41,9 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-0 action-btns">
-                                    <button class="btn bg-main-light text-main" (click)="editTask(tasklist)"><i
-                                            class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn  text-danger" (click)="deletetask(tasklist)"><i
+                                    <button type="button" class="btn bg-main-light text-main"
+                                        (click)="editTask(tasklist)"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" class="btn  text-danger" (click)="deletetask(tasklist)"><i
                                             class="fa-solid fa-trash"></i></button>
                                 </div>
                             </td>
@@ -65,8 +65,9 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-main">
-                    <div class="modal-title" id="exampleModalLabel">{{!this.editflag ? 'Create Task' : 'Update Task'
-                        }}</div>
+                    <div class="modal-title">
+                        {{ !editflag ? 'create' : 'update' }}
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         (click)="closemodal()"></button>
                 </div>
@@ -85,14 +86,14 @@
                                 Invalid Name
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <!-- <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Task Description</label>
                             <input type="text" class="form-control" formControlName="description">
                             <div class="text-danger"
                                 *ngIf="f['description'].touched && f['description'].errors?.['required']">
                                 Description is required
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-sm-6">
                             <div class="mt-2 form-label">Task Frequency</div>
                             <select class="form-control" formControlName="frequency" id="">
@@ -113,14 +114,14 @@
                                 createdDate is required
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <!-- <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Start Date</label>
                             <input type="date" class="form-control" formControlName="startDate">
                             <div class="text-danger"
                                 *ngIf="f['startDate'].touched && f['startDate'].errors?.['required']">
                                 startDate is required
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-sm-6">
                             <label for="exampleInputEmail1" class="form-label">Due Date</label>
                             <input type="date" class="form-control" formControlName="dueDate">
