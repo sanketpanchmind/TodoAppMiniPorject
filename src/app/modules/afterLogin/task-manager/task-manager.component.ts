@@ -173,6 +173,7 @@ export class TaskManagerComponent {
     this.taskservice.editTask(params).subscribe({
       next: (res: any) => {
         console.log("tasks updates", res);
+        this.getAllTasks();
         this.closemodal();
       },
       error: (error: any) => {
