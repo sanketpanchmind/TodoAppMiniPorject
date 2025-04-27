@@ -61,6 +61,7 @@ export class TaskManagerComponent {
     this.createtaskmodal.nativeElement.style.display = 'none';
     this.editflag = !this.editflag;
     console.log("modal closed", this.editflag);
+    this.clear();
   }
 
 
